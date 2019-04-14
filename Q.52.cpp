@@ -15,7 +15,7 @@ int main()
 	int st,ct[2],d;
 	
 	
-	cout<<"\nEnter the size for SJF:";
+	cout<<"\nEnter the size for SJF(Max:2):";
 	
 	cin>>n;
 	int a[n][2],b[n][2];
@@ -23,13 +23,20 @@ int main()
 	{
 		
 	cout<<"\nEnter Arrival time for p"<<i<<":";
+	
 	cin>>a[i][0];
 	b[i][0]=a[i][0];
 	
 	cout<<"\nEnter Burst timep"<<i<<":";
+	
 	cin>>a[i][1];
 	b[i][1]=a[i][1];	
 		
+	}
+	if(n==1)
+	{
+	b[2][0]=a[2][0]=-1;
+	b[2][1]=a[2][1]=-1;	
 	}
 	
     o=small(a,n);
@@ -37,23 +44,30 @@ int main()
     
     //Round Robin
     int rn;
-    cout<<"\nEnter the size for Round Robin:";
+    cout<<"\nEnter the size for Round Robin(Max:2):";
 	cin>>rn;
 	
 	int r[rn][2],max=0,v=0,t,c[2],nk,ar,r2[rn][2];
 	
 	
-	for(int i=1;i<=n;i++)
+	for(int i=1;i<=rn;i++)
 	{
 		
 	cout<<"\nEnter Arrival time for p"<<i<<":";
+
 	cin>>r[i][0];
 	r2[i][0]=r[i][0];
 	
 	cout<<"\nEnter Burst time"<<i<<":";
+	
 	cin>>r[i][1];
 	r2[i][1]=r[i][1];	
 		
+	}
+	if(rn==1)
+	{
+		r2[2][0]=r[2][0]=-1;
+		r2[2][1]=r[2][1]=-1;	
 	}
 	
 	 v=small(r,rn);
@@ -169,6 +183,11 @@ if(count!=1)
 	
 
 {
+	
+	if(b[2][0]==-1)
+	{
+		ct[2]=0;
+	}
 	//Round Robin process
  if(ct[1]>ct[2])
  {
@@ -230,13 +249,28 @@ if(ar!=0)
 
 }
 }
-
-cout<<"\n SJF";
 int tat[5];
+
+	
+cout<<"\n SJF";
+
 tat[1]=ct[1]-b[1][0];
 cout<<"\n Completion time p1:"<<ct[1]<<"\t Turn Around Time:"<<tat[1]<<"\t Waiting time:"<<tat[1]-b[1][1];
 tat[2]=ct[2]-b[2][0];
 cout<<"\n Completion time p2:"<<ct[2]<<"\t Turn Around Time:"<<tat[2]<<"\t Waiting time:"<<tat[2]-b[2][1];
+
+if(c[1]>c[2] && rn==2)
+{
+	c[1]=c[1]-2;
+}
+if(c[1]<c[2] && rn==2)
+{
+	c[2]=c[2]-2;
+}
+if(rn==1)
+{
+	c[2]=0;
+}
 
 
 cout<<"\n\n Round Robin";
