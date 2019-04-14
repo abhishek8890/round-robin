@@ -249,18 +249,51 @@ if(ar!=0)
 
 }
 }
-int tat[5];
+int tat[5],wt[5];
 
 	
 cout<<"\n SJF";
 
 tat[1]=ct[1]-b[1][0];
-cout<<"\n Completion time p1:"<<ct[1]<<"\t Turn Around Time:"<<tat[1]<<"\t Waiting time:"<<tat[1]-b[1][1];
+wt[1]=tat[1]-b[1][1];
+if(wt[1]<0)
+{
+	wt[1]=-(wt[1]);
+	if(ct[1]<0)
+	{
+		ct[1]=-(ct[1]);
+		ct[1]=ct[1]+wt[1];
+	}
+	else
+	{
+		ct[1]=ct[1]+wt[1];
+	}
+}
+cout<<"\n Completion time p1:"<<ct[1]<<"\t Turn Around Time:"<<tat[1]<<"\t Waiting time:"<<wt[1];
 tat[2]=ct[2]-b[2][0];
-cout<<"\n Completion time p2:"<<ct[2]<<"\t Turn Around Time:"<<tat[2]<<"\t Waiting time:"<<tat[2]-b[2][1];
+wt[2]=tat[2]-b[2][1];
+if(wt[2]<0)
+{
+	wt[2]=-(wt[2]);
+	if(ct[2]<0)
+	{
+		ct[2]=-(ct[2]);
+		ct[2]=ct[2]+wt[2];
+	}
+	else
+	{
+		ct[2]=ct[2]+wt[2];
+	}
+}
+cout<<"\n Completion time p2:"<<ct[2]<<"\t Turn Around Time:"<<tat[2]<<"\t Waiting time:"<<wt[2];
+
+if(c[1]>0 && c[2]>0)
+{
+
 
 if(c[1]>c[2] && rn==2)
 {
+	
 	c[1]=c[1]-2;
 }
 if(c[1]<c[2] && rn==2)
@@ -272,12 +305,71 @@ if(rn==1)
 	c[2]=0;
 }
 
-
+}
 cout<<"\n\n Round Robin";
 tat[3]=c[1]-r2[1][0];
-cout<<"\n Completion time p1:"<<c[1]<<"\t Turn Around Time:"<<tat[3]<<"\t Waiting time:"<<tat[3]-r2[1][1];
+wt[3]=tat[3]-r2[1][1];
+if(wt[3]<0)
+{
+	wt[3]=-(wt[3]);
+	if(c[1]<0)
+	{
+
+		c[1]=-(c[1]);
+		c[1]=c[1]+wt[3];
+	}
+	else
+	{
+		c[1]=c[1]+wt[3];
+	}
+}
+else
+{
+	c[1]=c[1]-wt[3];
+	if(c[1]<0)
+	{
+		c[1]=-(c[1]);
+	}
+	wt[3]=r2[1][1]-r2[2][1];
+	if(wt[3]<0)
+	{
+		wt[3]=-(wt[3]);
+	}
+}
+tat[3]=c[1]-r2[1][0];
+wt[3]=tat[3]-r2[1][1];
+cout<<"\n Completion time p3:"<<c[1]<<"\t Turn Around Time:"<<tat[3]<<"\t Waiting time:"<<wt[3];
 tat[4]=c[2]-r2[2][0];
-cout<<"\n Completion time p2:"<<c[2]<<"\t Turn Around Time:"<<tat[4]<<"\t Waiting time:"<<tat[4]-r2[2][1];
+wt[4]=tat[4]-r2[2][1];
+if(wt[4]<0)
+{
+
+	wt[4]=-(wt[4]);
+	if(c[2]<0)
+	{
+	
+		//c[2]=-(c[2]);
+		c[2]=c[2]+wt[4];
+	}
+	else
+	{
+		
+		c[2]=c[2]+wt[4];
+	}
+
+}
+else
+{
+	c[2]=c[2]-wt[4];
+	if(c[2]<0)
+	{
+		c[2]=-(c[2]);
+	}
+	
+}
+tat[4]=c[2]-r2[1][0];
+wt[4]=tat[4]-r2[2][1];
+cout<<"\n Completion time p4:"<<c[2]<<"\t Turn Around Time:"<<tat[4]<<"\t Waiting time:"<<wt[4];
 
 
 
